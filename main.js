@@ -81,13 +81,13 @@ for (let i = 0; i < posts.length; i++) {
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button" href="#" data-postid="${element.id}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
+                        Piace a <b id="like-counter${element.id}" class="js-likes-counter">${element.likes}</b> persone
                     </div>
                 </div> 
             </div>            
@@ -95,8 +95,15 @@ for (let i = 0; i < posts.length; i++) {
     
 }
 
-document.getElementsByClassName('like-button').addEventListener('click', function(){
+let buttons = document.getElementsByClassName("like-button");
+for(let i=0; i<buttons.length; i++){
+    buttons[i].addEventListener("click", function() {
+        this.style.color="blue";
+        let id = this.getAttribute("data-postid");
+        let numero = document.getElementById("like-counter"+id).textContent;
+        numero = parseInt(numero)+1;
+        document.getElementById("like-counter"+id).innerHTML=numero;
+    })
 
-    
-});
+}
 
